@@ -18,6 +18,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png">
     <link rel="manifest" href="assets/images/favicon/site.webmanifest">
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <meta name="theme-color" content="#1C4734">
     <link rel="stylesheet"
@@ -188,6 +190,45 @@
             }
         }
 
+        /* Estilos para los elementos de navegación */
+        .top-nav ul li {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .top-nav ul li::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: #006400;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        .top-nav ul li:hover {
+            color: #006400;
+            transform: translateY(-2px);
+        }
+
+        .top-nav ul li:hover::after {
+            width: 100%;
+        }
+
+        .top-nav ul li a {
+            transition: color 0.3s ease;
+            font-weight: bold;
+            font-size: 2.5rem;
+        }
+
+        .top-nav ul li:hover a {
+            color: #006400;
+        }
+
+
+
         /* Ajustes para dispositivos móviles */
         @media (max-width: 992px) {
             .amzn-side-countdown-container {
@@ -351,27 +392,46 @@
                 <div class="top-nav">
                     <div class="container">
                         <ul>
-                            <li class="active">
-                                <a href="/en/contents/our-news" target="_self">
-                                    Ejes Tematicos
+                            <li class="">
+                                <a href="">
+                                    INICIO
                                 </a>
                             </li>
-                            <li>
-                                <a href="/en/media/yildizda-yasam" target="_self">
-                                    Call For Papers
+                            <li class="">
+                                <a href="">
+                                    PROGRAMA
                                 </a>
                             </li>
-                            <li>
-                                <a href="/en/media/catalogues" target="_self">
-                                    Keynote Speakers
+                            <li class="">
+                                <a href="">
+                                    BENEFICIOS
                                 </a>
                             </li>
-                            <li>
-                                <a href="/en/corporate/corporate-identity" target="_self">
-                                    Inscripciones
+                            <li class="">
+                                <a href="">
+                                    INSCRIPCIÓN
                                 </a>
                             </li>
-
+                            <li class="">
+                                <a href="">
+                                    PONENTES
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="">
+                                    EJES TEMÁTICOS
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="">
+                                    COMISIÓN
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="">
+                                    SERVICIOS
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -420,92 +480,53 @@
 
             </section>
             {{-- ESTAS LISTO PARA EL EVENTO --}}
-            <div class="content-wrapper cards fadeUp pb"
+            <div class="content-wrapper cards fadeUp pb" 
                 style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1; visibility: inherit;">
                 <div class="content-head fadeUp"
                     style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1; visibility: inherit;">
-                    <span>
+                    <span id="programa">
                         ¿Estás listo para el evento?
                     </span>
                 </div>
                 <div class="row">
-                    <a href="/uploads/quality-certificates/tr/2025-2-17/024f2776-2b29-442e-9300-24742708d277.pdf"
-                        target="_blank" class="col-6 item">
-                        <div class="top">
+                   
+                    <div class="top col-6 item">
                             <span>
-                                Fecha de Inicio 01 al 22 de Octube
+                                DEL 10 DE NOVIEMBRE AL 14 DEL 2025
+                            </span>
+                            <span class="d-flex align-items-center">
+                                <a href="" style="font-size: 3rem; display: flex; align-items: center; gap: 15px;">
+                                    Descargar Cronograma 
+                                    <i class="fa-regular fa-file-excel"></i>
+                                </a>
                             </span>
                         </div>
-                        <i>
-                            <svg width="20" height="18" viewBox="0 0 20 18" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M8.99981 7.32583L7.87849 6.36906C7.48797 6.03585 6.8548 6.03585 6.46428 6.36906C6.07376 6.70228 6.07376 7.24253 6.46428 7.57574L9.29271 9.9891C9.48797 10.1557 9.74389 10.239 9.99981 10.239C10.2557 10.239 10.5117 10.1557 10.7069 9.9891L13.5353 7.57574C13.9259 7.24253 13.9259 6.70228 13.5353 6.36906C13.1448 6.03585 12.5117 6.03585 12.1211 6.36906L10.9998 7.32583V0.853251C10.9998 0.382013 10.5521 0 9.99981 0C9.44753 0 8.99981 0.382013 8.99981 0.853251V7.32583Z"
-                                    fill="#002A04"></path>
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M2 15.3586V7.6793C2 7.20806 1.55228 6.82605 1 6.82605C0.447715 6.82605 0 7.20806 0 7.6793V16.2118C0 16.4474 0.111929 16.6607 0.292893 16.8152C0.473858 16.9696 0.723858 17.0651 1 17.0651H19C19.2761 17.0651 19.5261 16.9696 19.7071 16.8152C19.8881 16.6607 20 16.4474 20 16.2118V7.6793C20 7.20806 19.5523 6.82605 19 6.82605C18.4477 6.82605 18 7.20806 18 7.6793V15.3586H2Z"
-                                    fill="#002A04"></path>
-                            </svg>
-                        </i>
-                    </a>
-                    <a href="/uploads/quality-certificates/tr/2024-2-9/714b78d2-3c23-47b5-b3de-89d949eff3d4.pdf"
-                        target="_blank" class="col-6 item">
-                        <div class="top">
+                        
+                    
+                        <div class="top col-6 item">
                             <span>
-                                Modalidad Presencial
+                                MODALIDAD PRESENCIAL, Vive la experiencia completa participando activamente en cada jornada, desde talleres hasta conferencias magistrales. 
                             </span>
                         </div>
-                        <i>
-                            <svg width="20" height="18" viewBox="0 0 20 18" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M8.99981 7.32583L7.87849 6.36906C7.48797 6.03585 6.8548 6.03585 6.46428 6.36906C6.07376 6.70228 6.07376 7.24253 6.46428 7.57574L9.29271 9.9891C9.48797 10.1557 9.74389 10.239 9.99981 10.239C10.2557 10.239 10.5117 10.1557 10.7069 9.9891L13.5353 7.57574C13.9259 7.24253 13.9259 6.70228 13.5353 6.36906C13.1448 6.03585 12.5117 6.03585 12.1211 6.36906L10.9998 7.32583V0.853251C10.9998 0.382013 10.5521 0 9.99981 0C9.44753 0 8.99981 0.382013 8.99981 0.853251V7.32583Z"
-                                    fill="#002A04"></path>
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M2 15.3586V7.6793C2 7.20806 1.55228 6.82605 1 6.82605C0.447715 6.82605 0 7.20806 0 7.6793V16.2118C0 16.4474 0.111929 16.6607 0.292893 16.8152C0.473858 16.9696 0.723858 17.0651 1 17.0651H19C19.2761 17.0651 19.5261 16.9696 19.7071 16.8152C19.8881 16.6607 20 16.4474 20 16.2118V7.6793C20 7.20806 19.5523 6.82605 19 6.82605C18.4477 6.82605 18 7.20806 18 7.6793V15.3586H2Z"
-                                    fill="#002A04"></path>
-                            </svg>
-                        </i>
-                    </a>
-                    <a href="/uploads/quality-certificates/tr/2024-7-3/077dbdc3-a0cb-410f-867d-0830314d8be0.pdf"
-                        target="_blank" class="col-6 item">
-                        <div class="top">
+                        
+                   
+                    
+                        <div class="top col-6 item">
                             <span>
-                                Lugar: Universidad Nacional Amazonas de Madre de Dios
+                                LUGAR: UNIVERSIDAD NACIONAL AMAZÓNICA DE MADRE DE DIOS – PUERTO MALDONADO – AV. JORGE CHÁVEZ CIUDAD UNIVERSITARIA.
                             </span>
                         </div>
-                        <i>
-                            <svg width="20" height="18" viewBox="0 0 20 18" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M8.99981 7.32583L7.87849 6.36906C7.48797 6.03585 6.8548 6.03585 6.46428 6.36906C6.07376 6.70228 6.07376 7.24253 6.46428 7.57574L9.29271 9.9891C9.48797 10.1557 9.74389 10.239 9.99981 10.239C10.2557 10.239 10.5117 10.1557 10.7069 9.9891L13.5353 7.57574C13.9259 7.24253 13.9259 6.70228 13.5353 6.36906C13.1448 6.03585 12.5117 6.03585 12.1211 6.36906L10.9998 7.32583V0.853251C10.9998 0.382013 10.5521 0 9.99981 0C9.44753 0 8.99981 0.382013 8.99981 0.853251V7.32583Z"
-                                    fill="#002A04"></path>
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M2 15.3586V7.6793C2 7.20806 1.55228 6.82605 1 6.82605C0.447715 6.82605 0 7.20806 0 7.6793V16.2118C0 16.4474 0.111929 16.6607 0.292893 16.8152C0.473858 16.9696 0.723858 17.0651 1 17.0651H19C19.2761 17.0651 19.5261 16.9696 19.7071 16.8152C19.8881 16.6607 20 16.4474 20 16.2118V7.6793C20 7.20806 19.5523 6.82605 19 6.82605C18.4477 6.82605 18 7.20806 18 7.6793V15.3586H2Z"
-                                    fill="#002A04"></path>
-                            </svg>
-                        </i>
-                    </a>
-                    <a href="/uploads/quality-certificates/tr/2024-7-3/bd6fb46d-de03-490d-bb80-78292c1891e3.pdf"
-                        target="_blank" class="col-6 item">
-                        <div class="top">
+                        
+                   
+                   
+                        <div class="top col-6 item">
                             <span>
-                                Dirigido a estudiantes egresados de la carrera de Ingeniería Agroindustrial o afines con
-                                interes de innovar
+                                Dirigido a Estudiantes y Egresados de Ingeniería Agroindustrial y carreras afines
+                                con vocación para emprender, innovar y liderar el desarrollo agroindustrial sostenible.
                             </span>
                         </div>
-                        <i>
-                            <svg width="20" height="18" viewBox="0 0 20 18" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M8.99981 7.32583L7.87849 6.36906C7.48797 6.03585 6.8548 6.03585 6.46428 6.36906C6.07376 6.70228 6.07376 7.24253 6.46428 7.57574L9.29271 9.9891C9.48797 10.1557 9.74389 10.239 9.99981 10.239C10.2557 10.239 10.5117 10.1557 10.7069 9.9891L13.5353 7.57574C13.9259 7.24253 13.9259 6.70228 13.5353 6.36906C13.1448 6.03585 12.5117 6.03585 12.1211 6.36906L10.9998 7.32583V0.853251C10.9998 0.382013 10.5521 0 9.99981 0C9.44753 0 8.99981 0.382013 8.99981 0.853251V7.32583Z"
-                                    fill="#002A04"></path>
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M2 15.3586V7.6793C2 7.20806 1.55228 6.82605 1 6.82605C0.447715 6.82605 0 7.20806 0 7.6793V16.2118C0 16.4474 0.111929 16.6607 0.292893 16.8152C0.473858 16.9696 0.723858 17.0651 1 17.0651H19C19.2761 17.0651 19.5261 16.9696 19.7071 16.8152C19.8881 16.6607 20 16.4474 20 16.2118V7.6793C20 7.20806 19.5523 6.82605 19 6.82605C18.4477 6.82605 18 7.20806 18 7.6793V15.3586H2Z"
-                                    fill="#002A04"></path>
-                            </svg>
-                        </i>
-                    </a>
+                        
+                   
 
                 </div>
             </div>
@@ -569,7 +590,7 @@
                                     <font style="vertical-align: inherit;">
                                         <font style="vertical-align: inherit;">
                                             Participarás en concursos académicos, ganarás premios y asistirás a eventos
-                                            empresariales.
+                                             académicos, científicos y empresariales. .
                                         </font>
                                     </font>
                                 </p>
@@ -933,7 +954,7 @@
                                     <nav class="header-menu">
                                         <div class="header-menu__wrapper" fade>
                                             <div class="menu-header-menu-container">
-                                                <img src="{{ asset('img/portadacongreso.png') }}" alt=""
+                                                <img src="{{ asset('img/LOGO CONEIA alternativo.png') }}" alt=""
                                                     style="width: 10%; height: 10%;">
                                             </div>
                                         </div>
@@ -2073,7 +2094,7 @@
                                     </ul> --}}
                                 </div>
                                 <figure>
-                                    <img src="{{ asset('img/eje1.jpg') }}">
+                                    <img src="{{ asset('img/premium_photo-1661962692059-55d5a4319814.jpeg') }}">
                                 </figure>
                             </div>
                             <div class="swiper-slide swiper-slide-next"
@@ -2093,7 +2114,7 @@
                                     </ul> --}}
                                 </div>
                                 <figure>
-                                    <img src="{{ asset('img/eje2.jpg') }}">
+                                    <img src="{{ asset('img/robot-realizando-trabajo-humano_23-2150912001.avif') }}">
                                 </figure>
                             </div>
                             <div class="swiper-slide"
@@ -2115,7 +2136,7 @@
                                     </ul> --}}
                                 </div>
                                 <figure>
-                                    <img src="{{ asset('img/eje3.jpg') }}">
+                                    <img src="{{ asset('img/depositphotos_46283711-stock-photo-photo-of-grain-elevators-in.jpg') }}">
                                 </figure>
                             </div>
                             <div class="swiper-slide"
@@ -2138,7 +2159,7 @@
                                     </ul> --}}
                                 </div>
                                 <figure>
-                                    <img src="{{ asset('img/eje4.jpg') }}">
+                                    <img src="{{ asset('img/Imagen1.png') }}">
                                 </figure>
                             </div>
                             <div class="swiper-slide" role="group" aria-label="5 / 5"
