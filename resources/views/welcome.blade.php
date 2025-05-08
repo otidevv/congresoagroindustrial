@@ -100,6 +100,105 @@
             }
         }
     </style>
+    <!-- Estilos específicos para el contador (con prefijo único) -->
+    <!-- Estilos CSS para posicionar y dar formato al contador -->
+    <style>
+        /* Ajustes para la estructura principal */
+        .start-image {
+            position: relative;
+        }
+
+        /* Estilos del contador */
+        .amzn-side-countdown-container {
+            position: absolute;
+            top: 110px;
+            /* Ajusta esta altura para alinear con "CONGRESO" */
+            right: 80px;
+            /* Distancia desde el borde derecho */
+            width: 300px;
+            background: rgba(17, 87, 64, 0.85);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 100;
+        }
+
+        .amzn-side-countdown-header {
+            background-color: rgba(12, 55, 37, 0.8);
+            color: #ffc107;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .amzn-side-countdown-content {
+            padding: 15px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .amzn-side-countdown-box {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 8px 0;
+        }
+
+        .amzn-side-countdown-number {
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+            line-height: 1;
+        }
+
+        .amzn-side-countdown-label {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            margin-top: 3px;
+        }
+
+        .amzn-side-countdown-event {
+            text-align: center;
+            padding: 8px;
+            background-color: #ffc107;
+            color: #333;
+            font-weight: bold;
+            font-size: 14px;
+            animation: amzn-pulse 2s infinite;
+            grid-column: span 4;
+        }
+
+        @keyframes amzn-pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(255, 193, 7, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 193, 7, 0);
+            }
+        }
+
+        /* Ajustes para dispositivos móviles */
+        @media (max-width: 992px) {
+            .amzn-side-countdown-container {
+                position: relative;
+                top: auto;
+                right: auto;
+                width: 90%;
+                margin: 20px auto;
+            }
+        }
+    </style>
     <link rel='stylesheet' id='bachoo-style-css' href='{{ asset('theme/fonts/style.css') }}' type='text/css'
         media='all' />
     <script src="{{ asset('assets/js/common/jquery.minc133.js?v=FgpCb_KJQlLNfOu91ta32o_NMZxltwRo8QtmkMRdAu8') }}"></script>
@@ -177,6 +276,64 @@
 
         gtag('config', 'AW-11392845459');
     </script>
+
+    <!-- Script JavaScript para el funcionamiento del contador -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fechas del evento
+            const amznEventStartDate = new Date('November 10, 2025 00:00:00').getTime();
+            const amznEventEndDate = new Date('November 14, 2025 23:59:59').getTime();
+
+            // Función para actualizar el contador
+            function amznUpdateSideCountdown() {
+                const now = new Date().getTime();
+                const distance = amznEventStartDate - now;
+                const countdownContent = document.getElementById('amzn-side-countdown-content');
+
+                if (distance > 0) {
+                    // Cálculo de tiempo
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    // Actualizar HTML
+                    countdownContent.innerHTML = `
+                    <div class="amzn-side-countdown-box">
+                        <div class="amzn-side-countdown-number">${days}</div>
+                        <div class="amzn-side-countdown-label">Días</div>
+                    </div>
+                    <div class="amzn-side-countdown-box">
+                        <div class="amzn-side-countdown-number">${hours}</div>
+                        <div class="amzn-side-countdown-label">Horas</div>
+                    </div>
+                    <div class="amzn-side-countdown-box">
+                        <div class="amzn-side-countdown-number">${minutes}</div>
+                        <div class="amzn-side-countdown-label">Minutos</div>
+                    </div>
+                    <div class="amzn-side-countdown-box">
+                        <div class="amzn-side-countdown-number">${seconds}</div>
+                        <div class="amzn-side-countdown-label">Segundos</div>
+                    </div>
+                `;
+                } else if (now <= amznEventEndDate) {
+                    // El evento está en curso
+                    countdownContent.innerHTML =
+                        `<div class="amzn-side-countdown-event">¡EL CONGRESO ESTÁ EN CURSO!</div>`;
+                } else {
+                    // El evento ha terminado
+                    countdownContent.innerHTML =
+                        `<div class="amzn-side-countdown-event" style="background-color: #6c757d;">EL CONGRESO HA FINALIZADO</div>`;
+                }
+            }
+
+            // Actualizar el contador cada segundo
+            setInterval(amznUpdateSideCountdown, 1000);
+
+            // Inicializar el contador inmediatamente
+            amznUpdateSideCountdown();
+        });
+    </script>
 </head>
 
 <body id="top">
@@ -220,92 +377,32 @@
                 </div>
 
             </div>
-            <div class="start-image"
-                style="display: flex; justify-content: flex-end; align-items: center; height: 65vh; padding-right: 0vw;">
+            <div class="start-image">
                 <figure>
-                    <div class="image" style="margin-left: auto; margin-right: -5vw; ">
-                        <video class="startimage" autoplay loop muted
+                    <div class="image">
+                        <img class="startimage" style="opacity: 0.3" src="{{ asset('img/fondo.png') }}"
                             style="translate: none; rotate: none; scale: none; transform: translate(0px, 0%);">
-                            <source src="{{ asset('video/principal.mp4') }}" type="video/mp4">
-                            Tu navegador no soporta el elemento de video.
-                        </video>
                     </div>
-                    <figcaption
-                        style="position: absolute; left: 5vw; top: 50%; transform: translateY(-50%); width: 45%; z-index: 2;">
-                        <!-- Elemento decorativo superior -->
-                        <div style="display: flex; align-items: center; margin-bottom: 20px;">
-                            <div style="width: 50px; height: 3px; background: #2ecc71; margin-right: 15px;"></div>
-                            <span
-                                style="font-family: 'Helvetica Neue', sans-serif; font-size: 14px; letter-spacing: 3px; color: #444;">XXIII
-                                EDICIÓN</span>
-                        </div>
-
-                        <!-- Título principal -->
-                        <h1
-                            style="
-                            font-family: 'Helvetica Neue', Arial, sans-serif;
-                            font-size: clamp(40px, 5vw, 72px);
-                            font-weight: 900;
-                            color: #1a1a1a;
-                            line-height: 0.95;
-                            margin: 0;
-                            letter-spacing: -1px;
-                            position: relative;
-                        ">
-                            CONGRESO<br>
-                            NACIONAL<br>
-                            <span style="color: #2ecc71; position: relative;">
-                                DE ESTUDIANTES
-                                <!-- Mancha decorativa-->
-                                <svg style="position: absolute; right: -30px; top: 0; opacity: 0.2; z-index: -1;"
-                                    width="100" height="60" viewBox="0 0 100 60">
-                                    <path d="M30,30 Q60,0 90,30 Q60,60 30,30 Z" fill="#2ecc71" />
-                                </svg>
-                            </span><br>
-                            DE INGENIERÍA<br>
-                            <span style="color: #2ecc71;">AGROINDUSTRIAL</span>
-                        </h1>
-
-                        <!-- Logo CONEIA con diseño moderno -->
-                        <div style="margin-top: 40px; display: flex; align-items: center;">
-                            <span
-                                style="
-                                font-family: 'Arial Black', sans-serif;
-                                font-size: 48px;
-                                font-weight: 900;
-                                color: #1a1a1a;
-                                letter-spacing: -2px;
-                                position: relative;
-                            ">
-                                CONEIA
-                                <span
-                                    style="
-                                    font-size: 16px;
-                                    vertical-align: super;
-                                    color: #2ecc71;
-                                    margin-left: 5px;
-                                    font-weight: 700;
-                                ">2025</span>
-                            </span>
-
-                            <!-- Elementos decorativos-->
-                            <div
-                                style="position: absolute; width: 15px; height: 15px; background: #2ecc71; border-radius: 50%; top: -10px; left: -10px;">
+                    <figcaption>
+                        <span letters-fade-in="" text-split="" style="opacity: 1;">
+                            <div class="word" style="display: inline-block;color: #000000">
+                                XXIV CONGRESO NACIONAL DE ESTUDIANTES
                             </div>
-                            <div
-                                style="position: absolute; width: 25px; height: 25px; border: 2px solid #2ecc71; border-radius: 50%; bottom: -15px; right: -20px;">
+                            <div class="word" style="display: inline-block;color:#006400">
+                                DE INGENIERÍA AGROINDUSTRIAL
                             </div>
-                        </div>
-
-                        <!-- Línea decorativa inferior -->
-                        <div style="margin-top: 30px; display: flex; align-items: center;">
-                            <div style="width: 100px; height: 3px; background: #2ecc71;"></div>
-                            <span
-                                style="font-family: 'Helvetica Neue', sans-serif; font-size: 12px; margin-left: 15px; color: #666; letter-spacing: 2px;">PERÚ
-                                2025</span>
-                        </div>
+                        </span>
                     </figcaption>
                 </figure>
+
+                <div class="amzn-side-countdown-container">
+                    <div class="amzn-side-countdown-header">
+                        10 - 14 de Noviembre, 2025
+                    </div>
+                    <div id="amzn-side-countdown-content" class="amzn-side-countdown-content">
+                        <!-- El contador se insertará aquí mediante JavaScript -->
+                    </div>
+                </div>
             </div>
             {{-- //contenedor de contexto evento --}}
             <section style="background: #F8F9F4;">
@@ -851,7 +948,7 @@
 
 
                             <section class="cookie-popup">
-                                <div class="cookie-text">Do you wish <br> to accept cookies?</div>
+                                <div class="cookie-text">Aceptar <br> cookies?</div>
                                 <div class="cookie-buttons">
                                     <button id="cookie-accept" class=" cookie-btn btn-primary dark">Yes</button>
                                     <button id="cookie-dismiss" class=" cookie-btn btn-primary">No</button>
@@ -863,7 +960,7 @@
                                     <div class="experts-wrapper">
                                         <div class="experts-main">
                                             <div class="experts-top">
-                                                <h3 class="experts-title" fade fade-trigger="scroll">KEYNOTE SPEAKERS
+                                                <h3 class="experts-title" fade fade-trigger="scroll">PONENTES
                                                 </h3>
                                                 <p class="experts-event p-m" fade fade-trigger="scroll">Nuestros
                                                     profesionales expertos empoderan a nuestro equipo para impulsar la
@@ -880,7 +977,7 @@
 
                                             </div>
                                         </div>
-                                        <div class="experts-content" fade fade-trigger="scroll">
+                                        {{-- <div class="experts-content" fade fade-trigger="scroll">
                                             <div class="experts-item yellow">
                                                 <div class="experts-item__top">
                                                     <div class="experts-item__content">
@@ -1620,7 +1717,7 @@
                                                     </div>
                                                 </a>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </section>
@@ -1782,7 +1879,8 @@
                                                         <g id="Group_9" data-name="Group 9">
                                                             <g id="Group_28" data-name="Group 28">
                                                                 <rect id="Rectangle" width="11" height="2"
-                                                                    transform="translate(0 5)" fill="#53575e"></rect>
+                                                                    transform="translate(0 5)" fill="#53575e">
+                                                                </rect>
                                                                 <path id="Rectangle-2" data-name="Rectangle"
                                                                     d="M0,.128H11V1.872H0Z"
                                                                     transform="translate(4.5 11.5) rotate(-90)"
@@ -1824,18 +1922,15 @@
                                 Est. Lila Ruby Isuiza Perez
                                 <i>
                                     <div class="icon-open">
-                                        <svg id="Group_27" data-name="Group 27"
-                                            xmlns="http://www.w3.org/2000/svg" width="34" height="34"
-                                            viewBox="0 0 34 34">
+                                        <svg id="Group_27" data-name="Group 27" xmlns="http://www.w3.org/2000/svg"
+                                            width="34" height="34" viewBox="0 0 34 34">
                                             <g id="Group_29" data-name="Group 29">
                                                 <g id="Group_22" data-name="Group 22">
                                                     <g id="Oval" fill="none" stroke="#53575e"
                                                         stroke-miterlimit="10" stroke-width="2">
-                                                        <circle cx="17" cy="17" r="17"
-                                                            stroke="none">
+                                                        <circle cx="17" cy="17" r="17" stroke="none">
                                                         </circle>
-                                                        <circle cx="17" cy="17" r="16"
-                                                            fill="none">
+                                                        <circle cx="17" cy="17" r="16" fill="none">
                                                         </circle>
                                                     </g>
                                                     <g id="Group_25" data-name="Group 25"
@@ -1858,9 +1953,8 @@
                                         </svg>
                                     </div>
                                     <div class="icon-close">
-                                        <svg id="Group_27" data-name="Group 27"
-                                            xmlns="http://www.w3.org/2000/svg" width="34" height="34"
-                                            viewBox="0 0 34 34">
+                                        <svg id="Group_27" data-name="Group 27" xmlns="http://www.w3.org/2000/svg"
+                                            width="34" height="34" viewBox="0 0 34 34">
                                             <g id="Group_7" data-name="Group 7">
                                                 <g id="Oval" fill="none" stroke="#53575e"
                                                     stroke-miterlimit="10" stroke-width="2">
@@ -1898,9 +1992,9 @@
             <div class="history-slider">
                 <div class="slider-button-items">
                     <div class="slide-control">
-                        <div class="swiper-button-prev border swiper-button-disabled" tabindex="-1"
-                            role="button" aria-label="Previous slide"
-                            aria-controls="swiper-wrapper-a8b97310c100f5652f" aria-disabled="true">
+                        <div class="swiper-button-prev border swiper-button-disabled" tabindex="-1" role="button"
+                            aria-label="Previous slide" aria-controls="swiper-wrapper-a8b97310c100f5652f"
+                            aria-disabled="true">
                             <i>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                                     <path
@@ -1909,9 +2003,8 @@
                                 </svg>
                             </i>
                         </div>
-                        <div class="swiper-button-next border" tabindex="0" role="button"
-                            aria-label="Next slide" aria-controls="swiper-wrapper-a8b97310c100f5652f"
-                            aria-disabled="false">
+                        <div class="swiper-button-next border" tabindex="0" role="button" aria-label="Next slide"
+                            aria-controls="swiper-wrapper-a8b97310c100f5652f" aria-disabled="false">
                             <i>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                                     <path
@@ -2075,6 +2168,13 @@
                     </div>
                 </div>
             </div>
+            {{-- titulo comision --}}
+            <div class="content-head fadeUp"
+                style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1; visibility: inherit;">
+                <span>
+                    SERVICIOS
+                </span>
+            </div>
 
             <div class="map fadeUp">
                 <iframe
@@ -2111,8 +2211,101 @@
 
 
 
+    <!-- Modal -->
+    <div id="videoModal"
+        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.9); z-index:9999; justify-content:center; align-items:center;">
+        <div style="position:relative; width:70%; height:70%;">
+            <button onclick="closeModal()"
+                style="position:absolute; top:15px; right:20px; background:red; color:white; border:none; padding:10px 15px; font-size:16px; border-radius:5px; cursor:pointer; z-index:10000;">✕</button>
+            <video id="introVideo" autoplay muted playsinline
+                style="width:100%; height:100%; object-fit:cover; border-radius:10px;">
+                <source src="{{ asset('video/video_portada.mp4') }}" type="video/mp4">
+                Tu navegador no soporta videos HTML5.
+            </video>
+        </div>
+    </div>
 
+    <script>
+        window.onload = function() {
+            const modal = document.getElementById('videoModal');
+            modal.style.display = 'flex';
 
+            const video = document.getElementById('introVideo');
+            video.onended = function() {
+                modal.style.display = 'none';
+            };
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('videoModal');
+            modal.style.display = 'none';
+            document.getElementById('introVideo').pause();
+        }
+    </script>
+
+    <!-- Script para el contador (con selectores únicos) -->
+    <script>
+        // Fecha del evento: 10 de noviembre de 2025
+        const amznEventStartDate = new Date('November 10, 2025 00:00:00').getTime();
+        const amznEventEndDate = new Date('November 14, 2025 23:59:59').getTime();
+
+        function amznUpdateCountdown() {
+            const now = new Date().getTime();
+            const distance = amznEventStartDate - now;
+            const countdownArea = document.getElementById('amzn-countdown-area');
+
+            // Si el evento no ha comenzado
+            if (distance > 0) {
+                // Cálculo de tiempo
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Actualizar HTML
+                countdownArea.innerHTML = `
+                    <div class="amzn-countdown-box">
+                        <div class="amzn-countdown-number">${days}</div>
+                        <div class="amzn-countdown-label">Días</div>
+                    </div>
+                    <div class="amzn-countdown-box">
+                        <div class="amzn-countdown-number">${hours}</div>
+                        <div class="amzn-countdown-label">Horas</div>
+                    </div>
+                    <div class="amzn-countdown-box">
+                        <div class="amzn-countdown-number">${minutes}</div>
+                        <div class="amzn-countdown-label">Minutos</div>
+                    </div>
+                    <div class="amzn-countdown-box">
+                        <div class="amzn-countdown-number">${seconds}</div>
+                        <div class="amzn-countdown-label">Segundos</div>
+                    </div>
+                `;
+            } else if (now <= amznEventEndDate) {
+                // El evento está en curso
+                countdownArea.innerHTML = `
+                    <div class="amzn-event-in-progress">
+                        ¡EL CONGRESO ESTÁ EN CURSO!
+                    </div>
+                `;
+            } else {
+                // El evento ha terminado
+                countdownArea.innerHTML = `
+                    <div class="amzn-event-in-progress" style="background-color: #6c757d;">
+                        EL CONGRESO HA FINALIZADO
+                    </div>
+                `;
+            }
+        }
+
+        // Actualizar el contador cada segundo
+        setInterval(amznUpdateCountdown, 1000);
+
+        // Inicializar el contador inmediatamente
+        document.addEventListener('DOMContentLoaded', function() {
+            amznUpdateCountdown();
+        });
+    </script>
 
     <script src="assets/js/gsap/gsap.min.js"></script>
     <script src="assets/js/gsap/ScrollTrigger.min.js"></script>

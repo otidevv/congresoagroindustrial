@@ -7482,7 +7482,7 @@ section.pattern .stats-bg {
 .accordion-menu-content .accordion-menu .dropdownlink {
     cursor: pointer;
     display: flex;
-    font-size: 3rem;
+    font-size: 5rem;
     color: #1c4734;
     position: relative;
     transition: all .4s ease-out;
